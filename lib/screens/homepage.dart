@@ -132,6 +132,71 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  _add() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          TextStyle _headingStyle = Theme.of(context).textTheme.headline1!;
+          TextStyle _bodyStyle = Theme.of(context).textTheme.bodyText1!;
+          return SimpleDialog(
+            backgroundColor: BasedColors.lightBlack,
+            contentPadding: const EdgeInsets.all(16),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: const BorderSide(color: BasedColors.tomato, width: 1.5)),
+            children: [
+              RichText(
+                  text: TextSpan(children: [
+                    TextSpan(text: "Add additional Repo\n", style: _headingStyle),
+                    TextSpan(
+                        text:
+                        "Please enter the name of the owner of the Repo",
+                        style: _bodyStyle),
+                  ])),
+              TextFormField(
+               decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: BasedColors.tomato, width: 2.0)),
+                    labelStyle: TextStyle(
+                        color: Colors.white
+                    ),
+                    labelText: 'Repo Owner'
+                ),
+              ),
+              RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text:
+                        "Please enter the name of the Repo",
+                        style: _bodyStyle),
+                  ])),
+              TextFormField(
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: BasedColors.tomato, width: 2.0)),
+                    labelStyle: TextStyle(
+                        color: Colors.white
+                    ),
+                    labelText: 'Repo Name'
+                ),
+              ),
+              TextButton(
+                child: const Text('CANCEL'),
+                onPressed: () {
+                },
+              ),
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -302,6 +367,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     ),
             ),
+            SpeedDialChild(
+                child: IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    isDialOpen.value = false;
+                    _add();
+                  },
+                ),
+                label: "Add Repo"),
             SpeedDialChild(
                 child: IconButton(
                   icon: const Icon(Icons.info),
